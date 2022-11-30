@@ -15,7 +15,7 @@ namespace Domain.Aggregates.AirportAggregate
         
         public Airport(string code, string name) : this()
         {
-            if (Code.Length != 3)
+            if (code.Length != 3)
             {
                 throw new AirportDomainException("The Airport code must be three characters.");
             }
