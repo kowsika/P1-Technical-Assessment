@@ -9,8 +9,8 @@ namespace Domain.Aggregates.FlightAggregate
 {
     public class Flight : Entity, IAggregateRoot
     {
-        private Guid _originAirportId;
-        private Guid _destinationAirportId;
+        public Guid OriginAirportId { get; private set; }
+        public Guid DestinationAirportId { get; private set; }
         
         public DateTimeOffset Departure { get; private set; }
         public DateTimeOffset Arrival { get; private set; }
@@ -26,8 +26,8 @@ namespace Domain.Aggregates.FlightAggregate
         public Flight(DateTimeOffset departure, DateTimeOffset arrival, Guid originAirportId, Guid
             destinationAirportId) : this()
         {
-            _originAirportId = originAirportId;
-            _destinationAirportId = destinationAirportId;
+            OriginAirportId = originAirportId;
+            DestinationAirportId = destinationAirportId;
             Departure = departure;
             Arrival = arrival;
         }

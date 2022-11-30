@@ -20,12 +20,12 @@ namespace Infrastructure.EntityConfigurations
             builder.HasOne<Airport>()
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey("_originAirportId");
+                .HasForeignKey("OriginAirportId");
             
             builder.HasOne<Airport>()
                 .WithMany()
                 .IsRequired()
-                .HasForeignKey("_destinationAirportId");
+                .HasForeignKey("DestinationAirportId");
         }
     }
 }

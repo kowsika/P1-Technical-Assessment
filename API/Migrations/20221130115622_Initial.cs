@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,23 +25,23 @@ namespace API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    OriginAirportId = table.Column<Guid>(nullable: false),
+                    DestinationAirportId = table.Column<Guid>(nullable: false),
                     Departure = table.Column<DateTimeOffset>(nullable: false),
-                    Arrival = table.Column<DateTimeOffset>(nullable: false),
-                    _destinationAirportId = table.Column<Guid>(nullable: false),
-                    _originAirportId = table.Column<Guid>(nullable: false)
+                    Arrival = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Flights", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Flights_Airports__destinationAirportId",
-                        column: x => x._destinationAirportId,
+                        name: "FK_Flights_Airports_DestinationAirportId",
+                        column: x => x.DestinationAirportId,
                         principalTable: "Airports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Flights_Airports__originAirportId",
-                        column: x => x._originAirportId,
+                        name: "FK_Flights_Airports_OriginAirportId",
+                        column: x => x.OriginAirportId,
                         principalTable: "Airports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -81,14 +81,14 @@ namespace API.Migrations
                 column: "FlightId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flights__destinationAirportId",
+                name: "IX_Flights_DestinationAirportId",
                 table: "Flights",
-                column: "_destinationAirportId");
+                column: "DestinationAirportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flights__originAirportId",
+                name: "IX_Flights_OriginAirportId",
                 table: "Flights",
-                column: "_originAirportId");
+                column: "OriginAirportId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

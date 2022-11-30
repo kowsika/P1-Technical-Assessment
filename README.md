@@ -8,26 +8,45 @@ We like to use some modern best practices in this assignment and try to point yo
 
 ## Excercise "requirements"
 
-- Apply the following practices throughout the project
-    - Domain Driven Design
-    - CQRS
-    - Mediator pattern (Using [MediatR](https://github.com/jbogard/MediatR))  
-    - Persistence ignorance
-    - SOLID
-- An API that can
-    - Search the flights for a destination
-        - Must show the flight details
-        - Must show the lowest price for each found flight
-    - Build up an order
+- Implement the following features:
+    - **Feature 1**: Search the available flights for a destination
+        - You can search available flights to a specific destination
+        - Does not include flights that are not available (has no rates)
+        - For each found flight show:
+          - Departure airport code
+          - Arrival airport code
+          - Departure datetime
+          - Arrival datetime
+          - Lowest Price
+    - **Feature 2**: Add customers
+        - Add API endpoints that creates and gets customers
+        - A customer has
+          - ID
+          - First name
+          - Last name
+          - Date of birth
+        - The order has a reference to the customer id
+    - **Feature 3**: Placing an order
+        - Must have endpoints to create an order
         - Must use the Ordering domain (`Domain/Aggregates/OrderAggregate/`)
         - Must be able to fill the order with the (just the necessary) details, while still in draft state
-    - Confirm an order
+        - Respects the business logic
+    - **Feature 4:** Changing a flight rate price
+        - An endpoint to change the price of a flight rate
+        - When a flight rate changes, must update the order line prices as well for orders that are still in draft
+        - When an order price changes, notify the customer (fake the notification with a `Console.WriteLine`)
+    - **Feature 5**: Confirming an order
         - Must be able to confirm the order
-- Business logic
-    - An order that's still in draft must update the order line prices when the flight rate price changes
-    - When the order price changes, the user must be notified (can be implemented as `Console.WriteLine`)
-    - When an order is confirmed, the any ordered rates should lower their availability by the quantity ordered
-- Other
+        - When an order is confirmed, the any ordered rates should lower their availability by the quantity ordered
+        - Notifies the customer about the confirmed order (fake the notification with a `Console.WriteLine`)
+        - Its not possible to make changes to a confirmed order (guarded by domain)
+- **Architecture requirements**: Apply the following practices throughout the project
+    - Domain Driven Design
+    - CQRS
+    - Mediator pattern (Using [MediatR](https://github.com/jbogard/MediatR))
+    - Persistence ignorance
+    - SOLID
+- **Other**
     - The project must be runnable on MacOS and Windows
     - If there are additional steps for us to take to run it, please write them down
 
@@ -38,7 +57,7 @@ We like to use some modern best practices in this assignment and try to point yo
 ## Prerequisities
 
 - Docker Desktop
-- .NET Core 3.1 SDK
+- .NET 6 SDK
 
 ## Getting started
 

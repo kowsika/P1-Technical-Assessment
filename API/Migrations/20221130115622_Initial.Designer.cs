@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Migrations
 {
     [DbContext(typeof(FlightsContext))]
-    [Migration("20210505172237_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221130115622_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,17 +55,17 @@ namespace API.Migrations
                     b.Property<DateTimeOffset>("Departure")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("_destinationAirportId")
+                    b.Property<Guid>("DestinationAirportId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("_originAirportId")
+                    b.Property<Guid>("OriginAirportId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("_destinationAirportId");
+                    b.HasIndex("DestinationAirportId");
 
-                    b.HasIndex("_originAirportId");
+                    b.HasIndex("OriginAirportId");
 
                     b.ToTable("Flights");
                 });
@@ -97,13 +97,13 @@ namespace API.Migrations
                 {
                     b.HasOne("Domain.Aggregates.AirportAggregate.Airport", null)
                         .WithMany()
-                        .HasForeignKey("_destinationAirportId")
+                        .HasForeignKey("DestinationAirportId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Domain.Aggregates.AirportAggregate.Airport", null)
                         .WithMany()
-                        .HasForeignKey("_originAirportId")
+                        .HasForeignKey("OriginAirportId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
