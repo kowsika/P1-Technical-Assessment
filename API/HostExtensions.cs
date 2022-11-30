@@ -63,12 +63,12 @@ namespace API
                             context.Database.CanConnect();
                             connected = true;
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             retries++;
                             if (retries > maxRetryCount)
                             {
-                                throw e;
+                                throw;
                             }
 
                             Task.Delay(retryDelay).Wait();
