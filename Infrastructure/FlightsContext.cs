@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Aggregates.AirportAggregate;
@@ -40,6 +41,15 @@ namespace Infrastructure
             var result = await base.SaveChangesAsync(cancellationToken);
 
             return true;
+        }
+
+        public async Task<List<Flight>> GetFlightAsync(CancellationToken cancellationToken = default(CancellationToken))  
+        {
+            List<Flight> flights = new List<Flight>();
+
+            Flight f1 = new Flight(DateTimeOffset.UtcNow, DateTimeOffset.Now, new Guid(), new Guid());
+            flights.Add(f1);
+            return flights;
         }
     }
 }
